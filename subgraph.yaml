@@ -1,0 +1,24 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Lock
+    network: mumbai
+    source:
+      address: "0x1c727A6b4aCcF896081AD273c5f0Bb2d05C54e4A"
+      abi: Lock
+      startBlock: 40357136
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Withdrawal
+      abis:
+        - name: Lock
+          file: ./abis/Lock.json
+      eventHandlers:
+        - event: Withdrawal(indexed uint256,indexed uint256)
+          handler: handleWithdrawal
+      file: ./src/lock.ts
